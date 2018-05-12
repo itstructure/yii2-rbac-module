@@ -4,6 +4,13 @@ Yii2 RBAC module
 1 Introduction
 ----------------------------
 
+[![Latest Stable Version](https://poser.pugx.org/itstructure/yii2-rbac-module/v/stable)](https://packagist.org/packages/itstructure/yii2-rbac-module)
+[![Latest Unstable Version](https://poser.pugx.org/itstructure/yii2-rbac-module/v/unstable)](https://packagist.org/packages/itstructure/yii2-rbac-module)
+[![License](https://poser.pugx.org/itstructure/yii2-rbac-module/license)](https://packagist.org/packages/itstructure/yii2-rbac-module)
+[![Total Downloads](https://poser.pugx.org/itstructure/yii2-rbac-module/downloads)](https://packagist.org/packages/itstructure/yii2-rbac-module)
+[![Build Status](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/badges/build.png?b=master)](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/?branch=master)
+
 **Rbac module** -- Module for the Yii2 framework, which provides management with the next data:
 - Roles
 - Permissions
