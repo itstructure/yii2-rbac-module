@@ -8,14 +8,27 @@ use Itstructure\RbacModule\Module;
 /* @var $model Itstructure\RbacModule\models\Role */
 
 $this->title = Module::t('roles', 'Role') . ': ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => 'Roles',
+    'url' => [
+        $this->params['urlPrefix'].'index'
+    ]
+];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-view">
 
     <p>
-        <?php echo Html::a(Module::t('main', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a(Module::t('main', 'Delete'), ['delete', 'id' => $model->name], [
+        <?php echo Html::a(Module::t('main', 'Update'), [
+            $this->params['urlPrefix'].'update',
+            'id' => $model->name
+        ], [
+            'class' => 'btn btn-primary'
+        ]) ?>
+        <?php echo Html::a(Module::t('main', 'Delete'), [
+            $this->params['urlPrefix'].'delete',
+            'id' => $model->name
+        ], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Module::t('main', 'Are you sure you want to do this action?'),

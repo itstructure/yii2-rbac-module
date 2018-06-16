@@ -14,7 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="permission-index">
 
     <p>
-        <?php echo Html::a(Module::t('permissions', 'Create permission'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Module::t('permissions', 'Create permission'), [
+            $this->params['urlPrefix'].'create'
+        ], [
+            'class' => 'btn btn-success'
+        ]) ?>
     </p>
 
 
@@ -28,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(
                         Html::encode($item->name),
                         Url::to([
-                            'view', 'id' => $item->name
+                            $this->params['urlPrefix'].'view',
+                            'id' => $item->name
                         ])
                     );
                 },
@@ -45,6 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Module::t('main', 'Actions'),
                 'template' => '{view} {update} {delete}',
+                'urlCreator'=>function($action, $model, $key, $index){
+                    return Url::to([
+                        $this->params['urlPrefix'].$action,
+                        'id' => $model->name
+                    ]);
+                }
             ],
         ],
     ]); ?>

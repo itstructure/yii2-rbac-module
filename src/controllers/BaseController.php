@@ -19,6 +19,7 @@ use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterfac
  * @property bool $viewCreated
  * @property array $additionFields
  * @property array $additionAttributes
+ * @property string $urlPrefix Url prefix for redirect and view links.
  * @property ModelInterface $model
  * @property ActiveRecordInterface $searchModel
  * @property ValidateComponentInterface $validateComponent
@@ -51,6 +52,12 @@ abstract class BaseController extends Controller
      * @var array
      */
     protected $additionAttributes = [];
+
+    /**
+     * Url prefix for redirect and view links.
+     * @var string
+     */
+    protected $urlPrefix = '';
 
     /**
      * Model object record.
@@ -119,6 +126,17 @@ abstract class BaseController extends Controller
     public function init()
     {
         $this->view->params['user'] = Yii::$app->user->identity;
+    }
+
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     */
+    public function beforeAction($action)
+    {
+        $this->view->params['urlPrefix'] = $this->urlPrefix;
+
+        return parent::beforeAction($action);
     }
 
     /**
@@ -253,12 +271,12 @@ abstract class BaseController extends Controller
 
             if ($this->viewCreated) {
                 $redirectParams = [
-                    'view',
+                    $this->urlPrefix.'view',
                     'id' => $this->model->getId(),
                 ];
             } else {
                 $redirectParams = [
-                    'index',
+                    $this->urlPrefix.'index',
                 ];
             }
 
@@ -293,7 +311,7 @@ abstract class BaseController extends Controller
             $this->model->save()) {
 
             return $this->redirect([
-                'view',
+                $this->urlPrefix.'view',
                 'id' => $this->model->getId(),
             ]);
         }

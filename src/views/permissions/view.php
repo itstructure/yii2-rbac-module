@@ -8,14 +8,28 @@ use Itstructure\RbacModule\Module;
 /* @var $model Itstructure\RbacModule\models\Permission */
 
 $this->title = Module::t('permissions', 'Permission') . ': ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Module::t('permissions', 'Permissions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => Module::t('permissions', 'Permissions'),
+    'url' => [
+        $this->params['urlPrefix'].'index'
+    ]
+];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="permission-view">
 
     <p>
-        <?php echo Html::a(Module::t('main', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a(Module::t('main', 'Delete'), ['delete', 'id' => $model->name], [
+        <?php echo Html::a(Module::t('main', 'Update'), [
+            $this->params['urlPrefix'].'update',
+            'id' => $model->name
+        ], [
+            'class' => 'btn btn-primary'
+        ]) ?>
+
+        <?php echo Html::a(Module::t('main', 'Delete'), [
+            $this->params['urlPrefix'].'delete',
+            'id' => $model->name
+        ], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Module::t('main', 'Are you sure you want to do this action?'),

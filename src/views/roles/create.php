@@ -6,7 +6,12 @@ use Itstructure\RbacModule\Module;
 /* @var $model Itstructure\RbacModule\models\Role */
 
 $this->title = Module::t('roles', 'Create role');
-$this->params['breadcrumbs'][] = ['label' => Module::t('roles', 'Roles'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => Module::t('roles', 'Roles'),
+    'url' => [
+        $this->params['urlPrefix'].'index'
+    ]
+];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-create">
