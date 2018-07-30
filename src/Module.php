@@ -7,7 +7,7 @@ use yii\web\View;
 use yii\helpers\ArrayHelper;
 use yii\rbac\ManagerInterface;
 use yii\base\{Module as BaseModule, InvalidConfigException};
-use Itstructure\RbacModule\components\RbacValidateComponent;
+use Itstructure\RbacModule\components\{RbacValidateComponent, ProfileValidateComponent};
 
 /**
  * Rbac module class.
@@ -87,6 +87,16 @@ class Module extends BaseModule
         $this->setComponents(
             ArrayHelper::merge(
                 $this->getRbacValidateComponentConfig(),
+                $this->components
+            )
+        );
+
+        /**
+         * Set Profile validate component
+         */
+        $this->setComponents(
+            ArrayHelper::merge(
+                $this->getProfileValidateComponentConfig(),
                 $this->components
             )
         );
@@ -172,6 +182,21 @@ class Module extends BaseModule
         return [
             'rbac-validate-component' => [
                 'class' => RbacValidateComponent::class,
+                'authManager' => $this->_authManager,
+            ]
+        ];
+    }
+
+    /**
+     * Profile validate component config.
+     *
+     * @return array
+     */
+    private function getProfileValidateComponentConfig(): array
+    {
+        return [
+            'profile-validate-component' => [
+                'class' => ProfileValidateComponent::class,
                 'authManager' => $this->_authManager,
             ]
         ];

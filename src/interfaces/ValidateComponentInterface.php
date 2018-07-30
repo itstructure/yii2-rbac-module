@@ -2,6 +2,7 @@
 
 namespace Itstructure\RbacModule\interfaces;
 
+use yii\base\Model;
 use yii\rbac\ManagerInterface;
 
 /**
@@ -28,9 +29,9 @@ interface ValidateComponentInterface
     /**
      * Search model data.
      *
-     * @param $model ModelInterface
+     * @param $model Model
      *
      * @return ModelInterface
      */
-    public function setModel(ModelInterface $model): ModelInterface;
+    public function setModel(Model $model): ModelInterface;
 }

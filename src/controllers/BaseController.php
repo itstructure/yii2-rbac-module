@@ -9,7 +9,7 @@ use yii\filters\{VerbFilter, AccessControl};
 use yii\base\UnknownMethodException;
 use yii\web\{BadRequestHttpException, NotFoundHttpException, Controller};
 use Itstructure\RbacModule\Module;
-use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterface};
+use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterface, RbacIdentityInterface};
 
 /**
  * Class BaseController
@@ -21,7 +21,7 @@ use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterfac
  * @property array $additionAttributes
  * @property string $urlPrefix Url prefix for redirect and view links.
  * @property ModelInterface $model
- * @property ActiveRecordInterface $searchModel
+ * @property RbacIdentityInterface $searchModel
  * @property ValidateComponentInterface $validateComponent
  *
  * @package Itstructure\RbacModule\controllers
@@ -166,9 +166,9 @@ abstract class BaseController extends Controller
     /**
      * Set search model.
      *
-     * @param $model ActiveRecordInterface
+     * @param $model RbacIdentityInterface
      */
-    public function setSearchModel(ActiveRecordInterface $model): void
+    public function setSearchModel(RbacIdentityInterface $model): void
     {
         $this->searchModel = $model;
     }
@@ -196,9 +196,9 @@ abstract class BaseController extends Controller
     /**
      * Returns search model.
      *
-     * @return ActiveRecordInterface
+     * @return RbacIdentityInterface
      */
-    public function getSearchModel(): ActiveRecordInterface
+    public function getSearchModel(): RbacIdentityInterface
     {
         return $this->searchModel;
     }
@@ -397,6 +397,12 @@ abstract class BaseController extends Controller
         }
 
         $modelObject = $this->getNewModel();
+
+        if (!($modelObject instanceof RbacIdentityInterface)){
+            $modelClass = (new\ReflectionClass($modelObject));
+            throw new BadRequestHttpException($modelClass->getNamespaceName() .
+                '\\' . $modelClass->getShortName().' class  must be implemented from Itstructure\RbacModule\interfaces\RbacIdentityInterface.');
+        }
 
         if (!method_exists($modelObject, 'findOne')){
             $class = (new\ReflectionClass($modelObject));

@@ -2,9 +2,7 @@
 
 namespace Itstructure\RbacModule\components;
 
-use Yii;
-use yii\base\{Component, InvalidConfigException};
-use yii\rbac\ManagerInterface;
+use yii\base\{Model, InvalidConfigException};
 use Itstructure\RbacModule\{
     interfaces\ModelInterface,
     interfaces\ValidateComponentInterface
@@ -14,62 +12,27 @@ use Itstructure\RbacModule\{
  * Class RbacValidateComponent
  * Component class for RBAC.
  *
- * @property ManagerInterface $authManager
- *
  * @package Itstructure\RbacModule\components
  */
-class RbacValidateComponent extends Component implements ValidateComponentInterface
+class RbacValidateComponent extends BaseValidateComponent implements ValidateComponentInterface
 {
-    /**
-     * Auth manager.
-     *
-     * @var ManagerInterface
-     */
-    private $authManager;
-
-    /**
-     * Initialize.
-     */
-    public function init()
-    {
-        if (null === $this->authManager){
-            $this->setAuthManager(Yii::$app->authManager);
-        }
-
-        if (null === $this->authManager){
-            throw new InvalidConfigException('The authManager is not defined.');
-        }
-    }
-
-    /**
-     * Returns the authManager (RBAC).
-     *
-     * @return ManagerInterface
-     */
-    public function getAuthManager(): ManagerInterface
-    {
-        return $this->authManager;
-    }
-
-    /**
-     * Set authManager (RBAC).
-     *
-     * @param ManagerInterface $authManager
-     */
-    public function setAuthManager(ManagerInterface $authManager): void
-    {
-        $this->authManager = $authManager;
-    }
-
     /**
      * Sets Rbac model.
      *
-     * @param ModelInterface $model
+     * @param Model $model
+     *
+     * @throws InvalidConfigException
      *
      * @return ModelInterface
      */
-    public function setModel(ModelInterface $model): ModelInterface
+    public function setModel(Model $model): ModelInterface
     {
+        if (!($model instanceof ModelInterface)){
+            $modelClass = (new\ReflectionClass($model));
+            throw new InvalidConfigException($modelClass->getNamespaceName() .
+                '\\' . $modelClass->getShortName().' class  must be implemented from Itstructure\RbacModule\interfaces\ModelInterface.');
+        }
+
         $model->setAuthManager($this->authManager);
 
         return $model;
