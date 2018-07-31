@@ -114,7 +114,7 @@ abstract class Rbac extends Model
     public function init()
     {
         if (null === $this->authManager){
-            $this->authManager = Yii::$app->authManager;
+            $this->setAuthManager(Yii::$app->authManager);
         }
 
         if (null === $this->authManager){

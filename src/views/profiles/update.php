@@ -6,7 +6,7 @@ use Itstructure\RbacModule\Module;
 /* @var $model Itstructure\RbacModule\models\ProfileValidate */
 /* @var $roles yii\rbac\Role[] */
 
-$this->title = Module::t('profiles', 'Update profile') . ': ' . $model->name;
+$this->title = Module::t('profiles', 'Update profile') . ': ' . $model->userName;
 $this->params['breadcrumbs'][] = [
     'label' => Module::t('profiles', 'Profiles'),
     'url' => [
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = [
     ]
 ];
 $this->params['breadcrumbs'][] = [
-    'label' => $model->name,
+    'label' => $model->userName,
     'url' => [
         $this->params['urlPrefix'].'view',
         'id' => $model->id

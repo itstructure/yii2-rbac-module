@@ -8,4 +8,5 @@ return [
     'Permissions' => 'Разрешения',
     'Create role' => 'Создать роль',
     'Update role' => 'Обновить роль',
+    'No permissions' => 'Нет разрешений'
 ];

@@ -8,4 +8,5 @@ return [
     'Permissions' => 'Permissions',
     'Create role' => 'Create role',
     'Update role' => 'Update role',
+    'No permissions' => 'No permissions'
 ];

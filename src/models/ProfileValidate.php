@@ -96,9 +96,9 @@ class ProfileValidate extends Model implements ModelInterface
     /**
      * Set new roles values.
      *
-     * @param array $roles
+     * @param mixed $roles
      */
-    public function setRoles(array $roles)
+    public function setRoles($roles)
     {
         $this->roles = $roles;
     }

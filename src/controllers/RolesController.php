@@ -2,8 +2,7 @@
 
 namespace Itstructure\RbacModule\controllers;
 
-use yii\data\ArrayDataProvider;
-use Itstructure\RbacModule\models\Role;
+use Itstructure\RbacModule\models\{Role, RoleSearch};
 
 /**
  * Class RolesController
@@ -27,22 +26,6 @@ class RolesController extends BaseController
     }
 
     /**
-     * List of roles.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $this->validateComponent->getAuthManager()->getRoles()
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider
-        ]);
-    }
-
-    /**
      * Returns Role model name.
      *
      * @return string
@@ -53,12 +36,25 @@ class RolesController extends BaseController
     }
 
     /**
-     * Returns null.
+     * Returns RoleSearch model name.
      *
      * @return string|null
      */
     protected function getSearchModelName():string
     {
-        return null;
+        return RoleSearch::class;
+    }
+
+    /**
+     * Returns new object of search main model.
+     *
+     * @return mixed
+     */
+    protected function getNewSearchModel()
+    {
+        /* @var RoleSearch $searchModel */
+        $searchModel = parent::getNewSearchModel();
+        $searchModel->setAuthManager($this->validateComponent->getAuthManager());
+        return $searchModel;
     }
 }

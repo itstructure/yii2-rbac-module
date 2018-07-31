@@ -52,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Module::t('profiles', 'Name')
             ],
             'roles' => [
-                'attribute' => 'roles',
                 'label' => Module::t('profiles', 'Roles'),
                 'value' => function($model) {
                     /* @var $model RbacIdentityInterface */

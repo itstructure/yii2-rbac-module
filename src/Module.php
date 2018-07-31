@@ -162,6 +162,7 @@ class Module extends BaseModule
                     'modules/rbac/main' => 'main.php',
                     'modules/rbac/roles' => 'roles.php',
                     'modules/rbac/permissions' => 'permissions.php',
+                    'modules/rbac/profiles' => 'profiles.php',
                 ],
             ]
         ];

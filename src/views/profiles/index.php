@@ -51,7 +51,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($searchModel) {
                     /* @var $searchModel RbacIdentityInterface */
                     $roles = $searchModel->getRoles();
-                    return !empty($roles) ? implode(', ', array_keys($roles)) : Module::t('users', 'No roles');
+
+                    if (empty($roles)) {return Module::t('profiles', 'No roles');}
+
+                    return implode('<br>', array_map(function ($data) {
+
+                        return Html::a($data, Url::to([
+                            '/'.$this->params['urlPrefix'].'view',
+                            'id' => $data
+                        ]),
+                        [
+                            'target' => '_blank'
+                        ]);
+
+                    }, array_keys($roles)));
                 },
                 'format' => 'raw',
             ],

@@ -1,11 +1,12 @@
 <?php
 
-use yii\helpers\Html;
+use yii\helpers\{Html, Url};
 use yii\widgets\DetailView;
 use Itstructure\RbacModule\Module;
+use Itstructure\RbacModule\models\Permission;
 
 /* @var $this yii\web\View */
-/* @var $model Itstructure\RbacModule\models\Permission */
+/* @var $model Permission */
 
 $this->title = Module::t('permissions', 'Permission') . ': ' . $model->name;
 $this->params['breadcrumbs'][] = [
@@ -51,6 +52,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'description',
                         'label' => Module::t('permissions', 'Description')
+                    ],
+                    [
+                        'label' => Module::t('roles', 'Permissions'),
+                        'value' => function($model) {
+
+                            $permissions = $model->permissions;
+
+                            if (empty($permissions)) {return Module::t('roles', 'No permissions');}
+
+                            return implode('<br>', array_map(function ($data) {
+
+                                return Html::a($data, Url::to([
+                                    '/'.$this->params['urlPrefix'].'view',
+                                    'id' => $data
+                                ]),
+                                    [
+                                        'target' => '_blank'
+                                    ]);
+
+                            }, $permissions));
+                        },
+                        'format' => 'raw'
                     ],
                 ],
             ]); ?>

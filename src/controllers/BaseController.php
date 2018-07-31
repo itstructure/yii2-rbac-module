@@ -3,11 +3,10 @@
 namespace Itstructure\RbacModule\controllers;
 
 use Yii;
-use yii\db\ActiveRecordInterface;
 use yii\helpers\ArrayHelper;
 use yii\filters\{VerbFilter, AccessControl};
-use yii\base\UnknownMethodException;
-use yii\web\{BadRequestHttpException, NotFoundHttpException, Controller};
+use yii\base\{Model, UnknownMethodException};
+use yii\web\{BadRequestHttpException, ConflictHttpException, NotFoundHttpException, Controller};
 use Itstructure\RbacModule\Module;
 use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterface, RbacIdentityInterface};
 
@@ -21,7 +20,7 @@ use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterfac
  * @property array $additionAttributes
  * @property string $urlPrefix Url prefix for redirect and view links.
  * @property ModelInterface $model
- * @property RbacIdentityInterface $searchModel
+ * @property Model $searchModel
  * @property ValidateComponentInterface $validateComponent
  *
  * @package Itstructure\RbacModule\controllers
@@ -69,7 +68,7 @@ abstract class BaseController extends Controller
     /**
      * Search new model object.
      *
-     * @var ActiveRecordInterface
+     * @var Model
      */
     private $searchModel;
 
@@ -166,9 +165,9 @@ abstract class BaseController extends Controller
     /**
      * Set search model.
      *
-     * @param $model RbacIdentityInterface
+     * @param $model Model
      */
-    public function setSearchModel(RbacIdentityInterface $model): void
+    public function setSearchModel(Model $model): void
     {
         $this->searchModel = $model;
     }
@@ -196,9 +195,9 @@ abstract class BaseController extends Controller
     /**
      * Returns search model.
      *
-     * @return RbacIdentityInterface
+     * @return Model
      */
-    public function getSearchModel(): RbacIdentityInterface
+    public function getSearchModel(): Model
     {
         return $this->searchModel;
     }
@@ -332,11 +331,17 @@ abstract class BaseController extends Controller
      *
      * @param int|string $id
      *
+     * @throws ConflictHttpException
+     *
      * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
+
+        if (($model instanceof RbacIdentityInterface) && $id == Yii::$app->user->identity->getId()) {
+            throw new ConflictHttpException('You can not delete yourself.');
+        };
 
         $model->delete();
 
@@ -407,12 +412,6 @@ abstract class BaseController extends Controller
         }
 
         $modelObject = $this->getNewModel();
-
-        if (!($modelObject instanceof RbacIdentityInterface)){
-            $modelClass = (new\ReflectionClass($modelObject));
-            throw new BadRequestHttpException($modelClass->getNamespaceName() .
-                '\\' . $modelClass->getShortName().' class  must be implemented from Itstructure\RbacModule\interfaces\RbacIdentityInterface.');
-        }
 
         if (!method_exists($modelObject, 'findOne')){
             $class = (new\ReflectionClass($modelObject));

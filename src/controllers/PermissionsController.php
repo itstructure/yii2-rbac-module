@@ -2,8 +2,7 @@
 
 namespace Itstructure\RbacModule\controllers;
 
-use yii\data\ArrayDataProvider;
-use Itstructure\RbacModule\models\Permission;
+use Itstructure\RbacModule\models\{Permission, PermissionSearch};
 
 /**
  * Class PermissionsController
@@ -27,22 +26,6 @@ class PermissionsController extends BaseController
     }
 
     /**
-     * List of permissions.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $this->validateComponent->getAuthManager()->getPermissions()
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider
-        ]);
-    }
-
-    /**
      * Returns Permission model name.
      *
      * @return string
@@ -53,12 +36,25 @@ class PermissionsController extends BaseController
     }
 
     /**
-     * Returns null.
+     * Returns PermissionSearch model name.
      *
      * @return string|null
      */
     protected function getSearchModelName():string
     {
-        return null;
+        return PermissionSearch::class;
+    }
+
+    /**
+     * Returns new object of search main model.
+     *
+     * @return mixed
+     */
+    protected function getNewSearchModel()
+    {
+        /* @var PermissionSearch $searchModel */
+        $searchModel = parent::getNewSearchModel();
+        $searchModel->setAuthManager($this->validateComponent->getAuthManager());
+        return $searchModel;
     }
 }

@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Module::t('main', 'Actions'),
                 'template' => '{view} {update} {delete}',
-                'urlCreator'=>function($action, $model, $key, $index){
+                'urlCreator' => function($action, $model, $key, $index){
                     return Url::to([
                         $this->params['urlPrefix'].$action,
                         'id' => $model->name
