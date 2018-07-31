@@ -3,12 +3,12 @@
 namespace Itstructure\RbacModule\controllers;
 
 /**
- * Class ProfileController
- * ProfileController implements the CRUD actions for identityClass.
+ * Class ProfilesController
+ * ProfilesController implements the CRUD actions for identityClass.
  *
  * @package Itstructure\RbacModule\controllers
  */
-class ProfileController extends BaseController
+class ProfilesController extends BaseController
 {
     /**
      * Initialize.
@@ -21,6 +21,22 @@ class ProfileController extends BaseController
         $this->validateComponent = $this->module->get('profile-validate-component');
 
         parent::init();
+    }
+
+    /**
+     * Returns addition fields.
+     *
+     * @return array
+     */
+    protected function getAdditionFields(): array
+    {
+        $additionFields = [];
+
+        if ($this->action->id == 'update'){
+            $additionFields['roles'] = $this->validateComponent->getAuthManager()->getRoles();
+        }
+
+        return $additionFields;
     }
 
     /**

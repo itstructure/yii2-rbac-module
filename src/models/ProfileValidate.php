@@ -9,7 +9,7 @@ use Itstructure\RbacModule\interfaces\{ModelInterface, RbacIdentityInterface};
 /**
  * Class for validation user(profile) roles.
  *
- * @property string $name
+ * @property string $userUame
  * @property BaseRole[] $roles
  * @property RbacIdentityInterface $profileModel
  * @property ManagerInterface $authManager
@@ -88,9 +88,9 @@ class ProfileValidate extends Model implements ModelInterface
      *
      * @return string
      */
-    public function getName(): string
+    public function getUserName(): string
     {
-        return $this->profileModel->getName();
+        return $this->profileModel->getUserName();
     }
 
     /**
@@ -106,12 +106,11 @@ class ProfileValidate extends Model implements ModelInterface
     /**
      * List of profile assigned roles.
      *
-     * @return BaseRole[]
+     * @return string[]
      */
     public function getRoles()
     {
-        $roles = $this->authManager->getRolesByUser($this->profileModel->getId());
-        return array_keys($roles);
+        return array_keys($this->profileModel->getRoles());
     }
 
     /**

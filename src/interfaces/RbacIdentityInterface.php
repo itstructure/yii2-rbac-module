@@ -14,11 +14,11 @@ use yii\rbac\Role as BaseRole;
 interface RbacIdentityInterface extends ActiveRecordInterface, IdentityInterface
 {
     /**
-     * Save data.
+     * Get user name.
      *
      * @return string
      */
-    public function getName(): string ;
+    public function getUserName(): string ;
 
     /**
      * List of profile assigned roles.
