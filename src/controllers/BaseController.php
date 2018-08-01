@@ -19,6 +19,7 @@ use Itstructure\RbacModule\interfaces\{ModelInterface, ValidateComponentInterfac
  * @property array $additionFields
  * @property array $additionAttributes
  * @property string $urlPrefix Url prefix for redirect and view links.
+ * @property string $urlPrefixNeighbor Url prefix for redirect and view links of neighbor entity.
  * @property ModelInterface $model
  * @property Model $searchModel
  * @property ValidateComponentInterface $validateComponent
@@ -57,6 +58,12 @@ abstract class BaseController extends Controller
      * @var string
      */
     protected $urlPrefix = '';
+
+    /**
+     * Url prefix for redirect and view links of neighbor entity.
+     * @var string
+     */
+    protected $urlPrefixNeighbor = '';
 
     /**
      * Model object record.
@@ -133,7 +140,8 @@ abstract class BaseController extends Controller
      */
     public function beforeAction($action)
     {
-        $this->view->params['urlPrefix'] = $this->urlPrefix;
+        $this->view->params['urlPrefix']         = $this->urlPrefix;
+        $this->view->params['urlPrefixNeighbor'] = $this->urlPrefixNeighbor;
 
         return parent::beforeAction($action);
     }
@@ -384,7 +392,7 @@ abstract class BaseController extends Controller
     /**
      * Returns new object of search main model.
      *
-     * @return mixed
+     * @return RbacIdentityInterface|ModelInterface
      */
     protected function getNewSearchModel()
     {

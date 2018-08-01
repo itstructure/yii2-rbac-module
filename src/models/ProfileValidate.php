@@ -142,7 +142,7 @@ class ProfileValidate extends Model implements ModelInterface
      *
      * @param ManagerInterface $authManager
      */
-    public function setAuthManager(ManagerInterface $authManager): void
+    public function setAuthManager(ManagerInterface $authManager)
     {
         $this->authManager = $authManager;
     }

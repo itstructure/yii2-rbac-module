@@ -1,7 +1,7 @@
 <?php
 
 use yii\web\View;
-use yii\helpers\Html;
+use yii\helpers\{Html, Url};
 use yii\widgets\DetailView;
 use Itstructure\RbacModule\Module;
 use Itstructure\RbacModule\interfaces\RbacIdentityInterface;
@@ -56,8 +56,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     /* @var $model RbacIdentityInterface */
                     $roles = $model->getRoles();
-                    return !empty($roles) ? implode(', ', array_keys($roles)) : Module::t('profiles', 'No roles');
+
+                    if (empty($roles)) {return Module::t('profiles', 'No roles');}
+
+                    return implode('<br>', array_map(function ($data) {
+
+                        return Html::a($data, Url::to([
+                            '/'.$this->params['urlPrefixNeighbor'].'view',
+                            'id' => $data
+                        ]),
+                            [
+                                'target' => '_blank'
+                            ]);
+
+                    }, array_keys($roles)));
                 },
+                'format' => 'raw',
             ],
             'created_at' => [
                 'attribute' => 'created_at',

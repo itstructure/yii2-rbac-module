@@ -25,19 +25,47 @@ Yii2 RBAC module
 3 Installation
 ----------------------------
 
+### 3.1 General from remote repository
+
 Via composer:
 
-```composer require "itstructure/yii2-rbac-module": "^1.1.0"```
+```composer require "itstructure/yii2-rbac-module": "^2.0.0"```
 
 or in section **require** of composer.json file set the following:
 ```
 "require": {
-    "itstructure/yii2-rbac-module": "^1.1.0"
+    "itstructure/yii2-rbac-module": "^2.0.0"
 }
 ```
 and command ```composer install```, if you install yii2 project extensions first,
 
 or command ```composer update```, if all yii2 project extensions are already installed.
+
+### 3.2 If you are testing this package from local server directory
+
+In application ```composer.json``` file set the repository, like in example:
+
+```
+"repositories": [
+    {
+        "type": "path",
+        "url": "../yii2-rbac-module",
+        "options": {
+            "symlink": true
+        }
+    }
+],
+```
+
+Here,
+
+**yii2-rbac-module** - directory name, which has the same directory level like application and contains yii2 rbac module.
+
+Then run command:
+
+```composer require itstructure/yii2-rbac-module:dev-master --prefer-source```
+
+### 3.3 Addition components
 
 In accordance with the [documentation for Yii2](http://www.yiiframework.com/doc-2.0/guide-security-authorization.html), set **authManager** for application:
 
@@ -75,8 +103,7 @@ Base application config must be like in example below:
 
 ```php
 use Itstructure\RbacModule\Module;
-use Itstructure\RbacModule\controllers\RolesController;
-use Itstructure\RbacModule\controllers\PermissionsController;
+use Itstructure\RbacModule\controllers\{RolesController, PermissionsController, ProfilesController};
 ```
 ```php
 'modules' => [
@@ -85,6 +112,7 @@ use Itstructure\RbacModule\controllers\PermissionsController;
         'controllerMap' => [
             'roles' => RolesController::class,
             'permissions' => PermissionsController::class,
+            'profiles' => ProfilesController::class,
         ],
     ],
 ],
@@ -93,7 +121,9 @@ use Itstructure\RbacModule\controllers\PermissionsController;
 ### 4.3 Useful module attributes
 
 - ```loginUrl``` - set url to be redirected if you are not authorized.
-- ```accessRoles``` - The roles of users who are allowed access.
+- ```accessRoles``` - The roles of users who are allowed access to work with this package.
+- ```urlPrefix``` - Url prefix for redirect and view links (Default is empty).
+- ```urlPrefixNeighbor``` - Url prefix for redirect and view links of neighbor entity (Default is empty).
 
 License
 ----------------------------

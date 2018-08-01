@@ -3,10 +3,12 @@
 use yii\grid\GridView;
 use yii\helpers\{Url, Html};
 use Itstructure\RbacModule\Module;
+use Itstructure\RbacModule\models\RoleSearch;
 
 /* @var $this yii\web\View */
 /* @var $roles Itstructure\RbacModule\models\Role */
 /* @var $dataProvider yii\data\ArrayDataProvider */
+/* @var $searchModel RoleSearch */
 
 $this->title = Module::t('roles', 'Roles');
 $this->params['breadcrumbs'][] = $this->title;
@@ -42,6 +44,29 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'description',
                 'label' =>  Module::t('roles', 'Description'),
+            ],
+            'permissions' => [
+                'label' => Module::t('roles', 'Permissions'),
+                'value' => function($item) use ($searchModel) {
+
+                    /* @var $searchModel RoleSearch */
+                    $permissions = $searchModel->authManager->getPermissionsByRole($item->name);
+
+                    if (empty($permissions)) {return Module::t('roles', 'No permissions');}
+
+                    return implode('<br>', array_map(function ($data) {
+
+                        return Html::a($data->name, Url::to([
+                            '/'.$this->params['urlPrefixNeighbor'].'view',
+                            'id' => $data->name
+                        ]),
+                            [
+                                'target' => '_blank'
+                            ]);
+
+                    }, $permissions));
+                },
+                'format' => 'raw',
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

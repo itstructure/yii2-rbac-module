@@ -42,7 +42,7 @@ interface ModelInterface
      *
      * @param ManagerInterface $authManager
      */
-    public function setAuthManager(ManagerInterface $authManager): void;
+    public function setAuthManager(ManagerInterface $authManager);
 
     /**
      * Get auth manager.

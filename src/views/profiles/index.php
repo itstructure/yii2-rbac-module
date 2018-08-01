@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return implode('<br>', array_map(function ($data) {
 
                         return Html::a($data, Url::to([
-                            '/'.$this->params['urlPrefix'].'view',
+                            '/'.$this->params['urlPrefixNeighbor'].'view',
                             'id' => $data
                         ]),
                         [

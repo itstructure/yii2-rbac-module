@@ -52,9 +52,6 @@ class RolesController extends BaseController
      */
     protected function getNewSearchModel()
     {
-        /* @var RoleSearch $searchModel */
-        $searchModel = parent::getNewSearchModel();
-        $searchModel->setAuthManager($this->validateComponent->getAuthManager());
-        return $searchModel;
+        return parent::getNewSearchModel()->setAuthManager($this->validateComponent->getAuthManager());
     }
 }

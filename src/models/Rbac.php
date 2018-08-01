@@ -179,10 +179,13 @@ abstract class Rbac extends Model
      * Set auth manager.
      *
      * @param ManagerInterface $authManager
+     *
+     * @return $this
      */
-    public function setAuthManager(ManagerInterface $authManager): void
+    public function setAuthManager(ManagerInterface $authManager)
     {
         $this->authManager = $authManager;
+        return $this;
     }
 
     /**
