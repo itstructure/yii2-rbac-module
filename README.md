@@ -29,12 +29,12 @@ Yii2 RBAC module
 
 Via composer:
 
-```composer require "itstructure/yii2-rbac-module": "^2.0.0"```
+```composer require "itstructure/yii2-rbac-module": "^3.0.0"```
 
 or in section **require** of composer.json file set the following:
 ```
 "require": {
-    "itstructure/yii2-rbac-module": "^2.0.0"
+    "itstructure/yii2-rbac-module": "^3.0.0"
 }
 ```
 and command ```composer install```, if you install yii2 project extensions first,
@@ -103,16 +103,16 @@ Base application config must be like in example below:
 
 ```php
 use Itstructure\RbacModule\Module;
-use Itstructure\RbacModule\controllers\{RolesController, PermissionsController, ProfilesController};
+use Itstructure\RbacModule\controllers\{RoleController, PermissionController, ProfileController};
 ```
 ```php
 'modules' => [
     'rbac' => [
         'class' => Module::class,
         'controllerMap' => [
-            'roles' => RolesController::class,
-            'permissions' => PermissionsController::class,
-            'profiles' => ProfilesController::class,
+            'roles' => RoleController::class,
+            'permissions' => PermissionController::class,
+            'profiles' => ProfileController::class,
         ],
     ],
 ],

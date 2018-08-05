@@ -55,12 +55,14 @@ abstract class BaseController extends Controller
 
     /**
      * Url prefix for redirect and view links.
+     *
      * @var string
      */
     protected $urlPrefix = '';
 
     /**
      * Url prefix for redirect and view links of neighbor entity.
+     *
      * @var string
      */
     protected $urlPrefixNeighbor = '';
@@ -91,14 +93,14 @@ abstract class BaseController extends Controller
      *
      * @return string
      */
-    abstract protected function getModelName():string;
+    abstract protected function getModelName(): string;
 
     /**
      * Returns the name of the model to search it.
      *
      * @return string
      */
-    abstract protected function getSearchModelName():string;
+    abstract protected function getSearchModelName(): string;
 
     /**
      * @inheritdoc
@@ -136,6 +138,7 @@ abstract class BaseController extends Controller
 
     /**
      * @param \yii\base\Action $action
+     *
      * @return bool
      */
     public function beforeAction($action)
@@ -415,15 +418,16 @@ abstract class BaseController extends Controller
      */
     private function findModel($key)
     {
-        if (null === $key){
+        if (null === $key) {
             throw new BadRequestHttpException('Key parameter is not defined in findModel method.');
         }
 
         $modelObject = $this->getNewModel();
 
-        if (!method_exists($modelObject, 'findOne')){
+        if (!method_exists($modelObject, 'findOne')) {
             $class = (new\ReflectionClass($modelObject));
-            throw new UnknownMethodException('Method findOne does not exists in ' . $class->getNamespaceName() . '\\' . $class->getShortName().' class.');
+            throw new UnknownMethodException('Method findOne does not exists in ' . $class->getNamespaceName() . '\\' .
+                $class->getShortName().' class.');
         }
 
         $result = call_user_func([
@@ -449,7 +453,7 @@ abstract class BaseController extends Controller
     {
         $model = null === $key ? $this->getNewModel() : $this->findModel($key);
 
-        if (null === $this->validateComponent){
+        if (null === $this->validateComponent) {
             $this->setModel($model);
         } else {
             $this->setModel(

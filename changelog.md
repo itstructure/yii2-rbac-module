@@ -1,5 +1,11 @@
 ### CHANGE LOG:
 
+**3.0.0 August 5, 2018:**
+- Code fixes according with the PSR standards.
+- Rename ```RolesController``` to ```RoleController```.
+- Rename ```PermissionsController``` to ```PermissionController```.
+- Rename ```ProfilesController``` to ```ProfileController```.
+
 **2.0.0 August 1, 2018:**
 - Created classes to assign roles for profiles.
 - Code optimization.

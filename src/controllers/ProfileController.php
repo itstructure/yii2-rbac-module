@@ -3,12 +3,12 @@
 namespace Itstructure\RbacModule\controllers;
 
 /**
- * Class ProfilesController
- * ProfilesController implements the CRUD actions for identityClass.
+ * Class ProfileController
+ * ProfileController implements the CRUD actions for identityClass.
  *
  * @package Itstructure\RbacModule\controllers
  */
-class ProfilesController extends BaseController
+class ProfileController extends BaseController
 {
     /**
      * Initialize.
@@ -32,7 +32,7 @@ class ProfilesController extends BaseController
     {
         $additionFields = [];
 
-        if ($this->action->id == 'update'){
+        if ($this->action->id == 'update') {
             $additionFields['roles'] = $this->validateComponent->getAuthManager()->getRoles();
         }
 
@@ -44,7 +44,7 @@ class ProfilesController extends BaseController
      *
      * @return string
      */
-    protected function getModelName():string
+    protected function getModelName(): string
     {
         return \Yii::$app->user->identityClass;
     }
@@ -54,7 +54,7 @@ class ProfilesController extends BaseController
      *
      * @return string
      */
-    protected function getSearchModelName():string
+    protected function getSearchModelName(): string
     {
         return \Yii::$app->user->identityClass . 'Search';
     }

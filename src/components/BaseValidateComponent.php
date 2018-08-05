@@ -27,11 +27,11 @@ class BaseValidateComponent extends Component
      */
     public function init()
     {
-        if (null === $this->authManager){
+        if (null === $this->authManager) {
             $this->setAuthManager(Yii::$app->authManager);
         }
 
-        if (null === $this->authManager){
+        if (null === $this->authManager) {
             throw new InvalidConfigException('The authManager is not defined.');
         }
     }

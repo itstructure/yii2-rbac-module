@@ -27,10 +27,13 @@ class RbacValidateComponent extends BaseValidateComponent implements ValidateCom
      */
     public function setModel(Model $model): ModelInterface
     {
-        if (!($model instanceof ModelInterface)){
+        if (!($model instanceof ModelInterface)) {
+
             $modelClass = (new\ReflectionClass($model));
+
             throw new InvalidConfigException($modelClass->getNamespaceName() .
-                '\\' . $modelClass->getShortName().' class  must be implemented from Itstructure\RbacModule\interfaces\ModelInterface.');
+                '\\' . $modelClass->getShortName().' class  must be implemented from 
+                Itstructure\RbacModule\interfaces\ModelInterface.');
         }
 
         $model->setAuthManager($this->authManager);

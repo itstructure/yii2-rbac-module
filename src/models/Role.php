@@ -3,7 +3,7 @@
 namespace Itstructure\RbacModule\models;
 
 use yii\helpers\ArrayHelper;
-use yii\rbac\{Item, Role as BaseRole};
+use yii\rbac\{Item, Role as BaseRole, ManagerInterface};
 use Itstructure\RbacModule\interfaces\ModelInterface;
 
 /**
@@ -11,6 +11,7 @@ use Itstructure\RbacModule\interfaces\ModelInterface;
  *
  * @property BaseRole $role
  * @property array $permissions
+ * @property ManagerInterface $authManager
  *
  * @package Itstructure\RbacModule\models
  */
@@ -57,9 +58,7 @@ class Role extends Rbac implements ModelInterface
      */
     protected function getCurrentChildren(): array
     {
-        $permissions = $this->authManager->getPermissionsByRole(
-            $this->getOldName()
-        );
+        $permissions = $this->authManager->getPermissionsByRole($this->getOldName());
 
         return array_keys($permissions);
     }

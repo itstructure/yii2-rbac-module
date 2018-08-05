@@ -113,11 +113,11 @@ abstract class Rbac extends Model
      */
     public function init()
     {
-        if (null === $this->authManager){
+        if (null === $this->authManager) {
             $this->setAuthManager(Yii::$app->authManager);
         }
 
-        if (null === $this->authManager){
+        if (null === $this->authManager) {
             throw new InvalidConfigException('The authManager is not defined.');
         }
     }
@@ -211,9 +211,7 @@ abstract class Rbac extends Model
         $instance->name = $item->name;
         $instance->description = $item->description;
 
-        return $this->setChildrenForInstance(
-            $this->setItemForInstance($instance, $item)
-        );
+        return $this->setChildrenForInstance($this->setItemForInstance($instance, $item));
     }
 
     /**
@@ -223,19 +221,16 @@ abstract class Rbac extends Model
      */
     public function save(): bool
     {
-        if (!$this->validate()){
+        if (!$this->validate()) {
             return false;
         }
 
         $item = $this->createItem($this->name);
         $item->description = $this->description;
 
-        if ($this->checkForNewRecord()){
-
+        if ($this->checkForNewRecord()) {
             return $this->createData($item);
-
         } else {
-
             return $this->updateData($item);
         }
     }
@@ -257,9 +252,7 @@ abstract class Rbac extends Model
      */
     public function delete(): bool
     {
-        return $this->authManager->remove(
-            $this->createItem($this->name)
-        );
+        return $this->authManager->remove($this->createItem($this->name));
     }
 
     /**
@@ -271,19 +264,17 @@ abstract class Rbac extends Model
      */
     public function filterChlidrenBeforeAdd(array $chlidren): array
     {
-        if (null === $this->getOldName()){
+        if (null === $this->getOldName()) {
             return $chlidren;
         }
 
-        foreach ($chlidren as $key => $value){
+        foreach ($chlidren as $key => $value) {
 
-            $parent = $this->createItem(
-                $this->getOldName()
-            );
+            $parent = $this->createItem($this->getOldName());
 
             $child = $this->createChild($key);
 
-            if (!$this->authManager->canAddChild($parent, $child)){
+            if (!$this->authManager->canAddChild($parent, $child)) {
                 unset($chlidren[$key]);
             }
         }
@@ -302,7 +293,7 @@ abstract class Rbac extends Model
     {
         $item = $this->getItem($this->name);
 
-        if (null !== $item && $this->getOldName() !== $item->name){
+        if (null !== $item && $this->getOldName() !== $item->name) {
             $this->addError($attribute, Module::t('rbac', 'This name already exists.'));
             return false;
         }
@@ -330,14 +321,14 @@ abstract class Rbac extends Model
      */
     private function createData(Item $item): bool
     {
-        if (!$this->authManager->add($item)){
+        if (!$this->authManager->add($item)) {
             return false;
         }
 
-        if (count($this->getNewChildren()) > 0){
-            $this->addChildren(
-                $this->getNewChildren()
-            );
+        $newChildren = $this->getNewChildren();
+
+        if (count($newChildren) > 0) {
+            $this->addChildren($newChildren);
         }
 
         return true;
@@ -352,17 +343,16 @@ abstract class Rbac extends Model
      */
     private function updateData(Item $item): bool
     {
-        if (!$this->authManager->update($this->getOldName(), $item)){
+        if (!$this->authManager->update($this->getOldName(), $item)) {
             return false;
         }
 
         $this->authManager->removeChildren($item);
 
-        if (count($this->getNewChildren()) > 0){
+        $newChildren = $this->getNewChildren();
 
-            $this->addChildren(
-                $this->getNewChildren()
-            );
+        if (count($newChildren) > 0) {
+            $this->addChildren($newChildren);
         }
 
         return true;
@@ -375,7 +365,8 @@ abstract class Rbac extends Model
      */
     private function addChildren(array $childs): void
     {
-        foreach ($childs as $child){
+        foreach ($childs as $child) {
+
             $this->authManager->addChild(
                 $this->createItem($this->name),
                 $this->createChild($child)

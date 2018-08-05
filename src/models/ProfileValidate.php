@@ -14,7 +14,7 @@ use Itstructure\RbacModule\interfaces\{ModelInterface, RbacIdentityInterface};
  * @property RbacIdentityInterface $profileModel
  * @property ManagerInterface $authManager
  *
- * @package Itstructure\UsersModule\models
+ * @package Itstructure\RbacModule\models
  */
 class ProfileValidate extends Model implements ModelInterface
 {
@@ -37,7 +37,7 @@ class ProfileValidate extends Model implements ModelInterface
      */
     public function init()
     {
-        if (null === $this->authManager){
+        if (null === $this->authManager) {
             throw new InvalidConfigException('The authManager is not defined.');
         }
     }
@@ -166,7 +166,7 @@ class ProfileValidate extends Model implements ModelInterface
      */
     public function validateRoles($attribute): bool
     {
-        if (!is_array($this->roles)){
+        if (!is_array($this->roles)) {
             $this->addError($attribute, 'Incorrect roles data format.');
             return false;
         }
@@ -181,7 +181,7 @@ class ProfileValidate extends Model implements ModelInterface
      */
     public function save(): bool
     {
-        if (!$this->validate()){
+        if (!$this->validate()) {
             return false;
         }
 
@@ -207,13 +207,13 @@ class ProfileValidate extends Model implements ModelInterface
      */
     private function assignRoles(): void
     {
-        if (!$this->profileModel->getIsNewRecord()){
+        if (!$this->profileModel->getIsNewRecord()) {
             $this->authManager->revokeAll(
                 $this->profileModel->getId()
             );
         }
 
-        foreach ($this->roles as $role){
+        foreach ($this->roles as $role) {
             $roleObject = $this->authManager->getRole($role);
 
             if (null === $roleObject){

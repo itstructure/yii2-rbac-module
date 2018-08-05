@@ -2,15 +2,15 @@
 
 namespace Itstructure\RbacModule\controllers;
 
-use Itstructure\RbacModule\models\{Permission, PermissionSearch};
+use Itstructure\RbacModule\models\{Role, RoleSearch};
 
 /**
- * Class PermissionsController
- * PermissionsController implements the CRUD actions for Permission model.
+ * Class RoleController
+ * RoleController implements the CRUD actions for Role model.
  *
  * @package Itstructure\RbacModule\controllers
  */
-class PermissionsController extends BaseController
+class RoleController extends BaseController
 {
     /**
      * Initialize.
@@ -18,7 +18,7 @@ class PermissionsController extends BaseController
      */
     public function init()
     {
-        $this->viewPath = '@rbac/views/permissions';
+        $this->viewPath = '@rbac/views/roles';
 
         $this->validateComponent = $this->module->get('rbac-validate-component');
 
@@ -26,23 +26,23 @@ class PermissionsController extends BaseController
     }
 
     /**
-     * Returns Permission model name.
+     * Returns Role model name.
      *
      * @return string
      */
-    protected function getModelName():string
+    protected function getModelName(): string
     {
-        return Permission::class;
+        return Role::class;
     }
 
     /**
-     * Returns PermissionSearch model name.
+     * Returns RoleSearch model name.
      *
      * @return string|null
      */
-    protected function getSearchModelName():string
+    protected function getSearchModelName(): string
     {
-        return PermissionSearch::class;
+        return RoleSearch::class;
     }
 
     /**

@@ -65,11 +65,11 @@ class Module extends BaseModule
 
         $this->_authManager = Yii::$app->authManager;
 
-        if (null === $this->_authManager){
+        if (null === $this->_authManager) {
             throw new InvalidConfigException('The authManager is not defined.');
         }
 
-        if (!$this->_authManager instanceof ManagerInterface){
+        if (!$this->_authManager instanceof ManagerInterface) {
             throw new InvalidConfigException('The authManager must be implemented from yii\rbac\ManagerInterface.');
         }
 
@@ -138,7 +138,7 @@ class Module extends BaseModule
      */
     public static function t($category, $message, $params = [], $language = null)
     {
-        if (null === self::$_translations){
+        if (null === self::$_translations) {
             self::registerTranslations();
         }
 
