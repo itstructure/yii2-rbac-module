@@ -1,5 +1,9 @@
 ### CHANGE LOG:
 
+**3.0.1 July 17, 2020:**
+- Bug fix for `registerTranslations()` method. Set it static.
+- Readme fixes.
+
 **3.0.0 August 5, 2018:**
 - Code fixes according with the PSR standards.
 - Rename ```RolesController``` to ```RoleController```.

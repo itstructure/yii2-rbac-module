@@ -1,8 +1,6 @@
-Yii2 RBAC module
-==============
+# Yii2 RBAC module
 
-1 Introduction
-----------------------------
+## Introduction
 
 [![Latest Stable Version](https://poser.pugx.org/itstructure/yii2-rbac-module/v/stable)](https://packagist.org/packages/itstructure/yii2-rbac-module)
 [![Latest Unstable Version](https://poser.pugx.org/itstructure/yii2-rbac-module/v/unstable)](https://packagist.org/packages/itstructure/yii2-rbac-module)
@@ -11,41 +9,31 @@ Yii2 RBAC module
 [![Build Status](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/badges/build.png?b=master)](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/?branch=master)
 
-**Rbac module** -- Module for the Yii2 framework, which provides management with the next data:
+**RBAC module** - Module for the Yii2 framework, which provides management with the next data:
 - Roles
 - Permissions
 
-2 Dependencies
-----------------------------
+![RBAC extension structure](https://github.com/itstructure/yii2-rbac-module/blob/master/yii2_rbac_structure_en.jpg)
+
+## Dependencies
 
 - php >= 7.1
 - composer
 - MySql >= 5.5
 
-3 Installation
-----------------------------
+## Installation
 
-### 3.1 General from remote repository
+### General from remote repository
 
 Via composer:
 
-```composer require "itstructure/yii2-rbac-module": "^3.0.0"```
+`composer require itstructure/yii2-rbac-module "~3.0.1"`
 
-or in section **require** of composer.json file set the following:
-```
-"require": {
-    "itstructure/yii2-rbac-module": "^3.0.0"
-}
-```
-and command ```composer install```, if you install yii2 project extensions first,
+### If you are testing this package from local server directory
 
-or command ```composer update```, if all yii2 project extensions are already installed.
+In application `composer.json` file set the repository, like in example:
 
-### 3.2 If you are testing this package from local server directory
-
-In application ```composer.json``` file set the repository, like in example:
-
-```
+```json
 "repositories": [
     {
         "type": "path",
@@ -63,9 +51,9 @@ Here,
 
 Then run command:
 
-```composer require itstructure/yii2-rbac-module:dev-master --prefer-source```
+`composer require itstructure/yii2-rbac-module:dev-master --prefer-source`
 
-### 3.3 Addition components
+### Addition components
 
 In accordance with the [documentation for Yii2](http://www.yiiframework.com/doc-2.0/guide-security-authorization.html), set **authManager** for application:
 
@@ -84,27 +72,26 @@ In accordance with the [documentation for Yii2](http://www.yiiframework.com/doc-
 yii migrate --migrationPath=@yii/rbac/migrations
 ```
 
-4 Usage
-----------------------------
+## Usage
 
-### 4.1 Main properties
+### Main properties
 
-- The **name** of module: ```rbac```
-- The **namespace** for used classes: ```Itstructure\RbacModule```.
-- The **alias** to access in to module root directory: ```@rbac```.
-- **There is not a layout !** It's taken from application layout **main** by default **or how it is 
-configured**.
-You cat set ```layout``` attribute in module by custom.
-- **View** component is taken by default from the framework like **yii\web\View**. You cat set 
-**view** component in module by custom.
+- The **name** of module: `rbac`
+- The **namespace** for used classes: `Itstructure\RbacModule`.
+- The **alias** to access in to module root directory: `@rbac`.
 
-### 4.2 Application config
+- **There is not a layout !** It's taken from application layout **main** by default **or how it is configured**. You cat set `layout` attribute in module by custom.
+
+- **View** component is taken by default from the framework like **yii\web\View**. You cat set **view** component in module by custom.
+
+### Application config
 Base application config must be like in example below:
 
 ```php
 use Itstructure\RbacModule\Module;
 use Itstructure\RbacModule\controllers\{RoleController, PermissionController, ProfileController};
 ```
+
 ```php
 'modules' => [
     'rbac' => [
@@ -118,16 +105,17 @@ use Itstructure\RbacModule\controllers\{RoleController, PermissionController, Pr
 ],
 ```
 
-### 4.3 Useful module attributes
+### Useful module attributes
 
-- ```loginUrl``` - set url to be redirected if you are not authorized.
-- ```accessRoles``` - The roles of users who are allowed access to work with this package.
-- ```urlPrefix``` - Url prefix for redirect and view links (Default is empty).
-- ```urlPrefixNeighbor``` - Url prefix for redirect and view links of neighbor entity (Default is empty).
+You can set the following attributes in a module config:
 
-License
-----------------------------
+- `loginUrl` - set url to be redirected if you are not authorized.
+- `accessRoles` - The roles of users who are allowed access to work with this package.
+- `urlPrefix` - Url prefix for redirect and view links (Default is empty).
+- `urlPrefixNeighbor` - Url prefix for redirect and view links of neighbor entity (Default is empty).
 
-Copyright © 2018 Andrey Girnik girnikandrey@gmail.com.
+## License
+
+Copyright © 2018-2020 Andrey Girnik girnikandrey@gmail.com.
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT). See LICENSE.txt for details.
