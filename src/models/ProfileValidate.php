@@ -5,6 +5,7 @@ namespace Itstructure\RbacModule\models;
 use yii\rbac\{ManagerInterface, Role as BaseRole};
 use yii\base\{Model, InvalidConfigException};
 use Itstructure\RbacModule\interfaces\{ModelInterface, RbacIdentityInterface};
+use Itstructure\RbacModule\Module;
 
 /**
  * Class for validation user(profile) roles.
@@ -79,7 +80,7 @@ class ProfileValidate extends Model implements ModelInterface
     public function attributeLabels()
     {
         return [
-            'roles' => 'Roles',
+            'roles' => Module::t('roles', 'Roles'),
         ];
     }
 

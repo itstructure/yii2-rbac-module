@@ -5,6 +5,7 @@ namespace Itstructure\RbacModule\models;
 use yii\helpers\ArrayHelper;
 use yii\rbac\{Item, Role as BaseRole, ManagerInterface};
 use Itstructure\RbacModule\interfaces\ModelInterface;
+use Itstructure\RbacModule\Module;
 
 /**
  * Class Role
@@ -49,6 +50,18 @@ class Role extends Rbac implements ModelInterface
                 ],
             ]
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Module::t('roles', 'Name'),
+            'description' => Module::t('roles', 'Description'),
+            'permissions' => Module::t('roles', 'Permissions'),
+        ];
     }
 
     /**

@@ -12,6 +12,7 @@
 **RBAC module** - Module for the Yii2 framework, which provides management with the next data:
 - Roles
 - Permissions
+- Assign roles for users(profiles)
 
 ![RBAC extension structure](https://github.com/itstructure/yii2-rbac-module/blob/master/yii2_rbac_structure_en.jpg)
 
@@ -27,7 +28,7 @@
 
 Via composer:
 
-`composer require itstructure/yii2-rbac-module "~3.0.1"`
+`composer require itstructure/yii2-rbac-module "~3.0.2"`
 
 ### If you are testing this package from local server directory
 

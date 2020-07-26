@@ -1,5 +1,8 @@
 ### CHANGE LOG:
 
+**3.0.2 July 26, 2020:**
+- Set translations in `attributeLabels()` for Roles and Permissions.
+
 **3.0.1 July 17, 2020:**
 - Bug fix for `registerTranslations()` method. Set it static.
 - Readme fixes.

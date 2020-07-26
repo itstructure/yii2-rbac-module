@@ -5,6 +5,7 @@ namespace Itstructure\RbacModule\models;
 use yii\helpers\ArrayHelper;
 use yii\rbac\{Item, Permission as BasePermission, ManagerInterface};
 use Itstructure\RbacModule\interfaces\ModelInterface;
+use Itstructure\RbacModule\Module;
 
 /**
  * Class Permission
@@ -49,6 +50,18 @@ class Permission extends Rbac implements ModelInterface
                 ],
             ]
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Module::t('permissions', 'Name'),
+            'description' => Module::t('permissions', 'Description'),
+            'permissions' => Module::t('permissions', 'Permissions'),
+        ];
     }
 
     /**

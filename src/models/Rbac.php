@@ -165,17 +165,6 @@ abstract class Rbac extends Model
     }
 
     /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'name' => 'Name',
-            'description' => 'Description',
-        ];
-    }
-
-    /**
      * Set auth manager.
      *
      * @param ManagerInterface $authManager
