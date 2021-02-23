@@ -1,5 +1,8 @@
 ### CHANGE LOG:
 
+**3.0.3 February 23, 2021:**
+- Upgrade copyright year.
+
 **3.0.2 July 26, 2020:**
 - Set translations in `attributeLabels()` for Roles and Permissions.
 
