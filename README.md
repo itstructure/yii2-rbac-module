@@ -28,7 +28,7 @@
 
 Via composer:
 
-`composer require itstructure/yii2-rbac-module "~3.0.3"`
+`composer require itstructure/yii2-rbac-module "~3.0.4"`
 
 ### If you are testing this package from local server directory
 

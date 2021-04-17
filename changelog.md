@@ -1,5 +1,8 @@
 ### CHANGE LOG:
 
+**3.0.4 April 17, 2021:**
+- Bug fix: **Call to a member function validateCsrfToken() on string**.
+
 **3.0.3 February 23, 2021:**
 - Upgrade copyright year.
 
