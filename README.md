@@ -28,7 +28,7 @@
 
 Via composer:
 
-`composer require itstructure/yii2-rbac-module "~3.0.4"`
+`composer require itstructure/yii2-rbac-module "~3.0.5"`
 
 ### If you are testing this package from local server directory
 
@@ -117,6 +117,6 @@ You can set the following attributes in a module config:
 
 ## License
 
-Copyright © 2018-2021 Andrey Girnik girnikandrey@gmail.com.
+Copyright © 2018-2023 Andrey Girnik girnikandrey@gmail.com.
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT). See LICENSE.txt for details.
