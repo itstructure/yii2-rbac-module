@@ -9,7 +9,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/badges/build.png?b=master)](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/itstructure/yii2-rbac-module/?branch=master)
 
-**RBAC module** - Module for the Yii2 framework, which provides management with the next data:
+**RBAC module** - Module for the Yii2 v2.0.x framework, which provides management with the next data:
 - Roles
 - Permissions
 - Assign roles for users(profiles)
@@ -19,8 +19,8 @@
 ## Dependencies
 
 - php >= 7.1
-- composer
-- MySql >= 5.5
+- composer 2
+- MySql >= 5.5 or MariaDB >= 10.1
 
 ## Installation
 
@@ -28,7 +28,7 @@
 
 Via composer:
 
-`composer require itstructure/yii2-rbac-module "~3.0.5"`
+`composer require itstructure/yii2-rbac-module "~3.0.6"`
 
 ### If you are testing this package from local server directory
 
@@ -117,6 +117,6 @@ You can set the following attributes in a module config:
 
 ## License
 
-Copyright © 2018-2023 Andrey Girnik girnikandrey@gmail.com.
+Copyright © 2018-2025 Andrey Girnik girnikandrey@gmail.com.
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT). See LICENSE.txt for details.

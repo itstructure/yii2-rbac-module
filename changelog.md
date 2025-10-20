@@ -1,5 +1,9 @@
 ### CHANGE LOG:
 
+**3.0.6 October 20, 2025:**
+- Improve scrutinizer config to use Composer 2.
+- Update Readme.
+
 **3.0.5 January 30, 2023:**
 - Upgrade copyright year.
 
